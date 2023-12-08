@@ -1,35 +1,57 @@
-const circle = document.querySelector('.progress-ring__circle');
-const radius = circle.r.baseVal.value;
-const circumference = 2 * Math.PI * radius;
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = `${circumference}`;
-const inputPercent = document.querySelector('.progress__percent')
+class Progress {
+  constructor(parentNode, value, isAnimated, isHidden) {
+    this._parentNode = parentNode;
+    this._value = value;
+    this._isAnimated = isAnimated;
+    this._isHidden = isHidden;
+  }
 
-inputPercent.addEventListener('change',function () {
-  setProgress(inputPercent.value);
-})
-function setProgress(percent) {
-  const offset = circumference - percent / 100 * circumference;
-  circle.style.strokeDashoffset = `${offset}`;
+  getTemplate() {
+    this._element = document.querySelector('.progress-template').content.querySelector('.progress-ring').cloneNode(true);
+  }
+
+  generateProgress() {
+    let progressRingCircle = this._element.querySelector('.progress-ring__circle');
+    if (this._isAnimated) {
+      progressRingCircle.style.animation = '2s linear 0s normal none infinite running rotation';
+    } else {
+      progressRingCircle.style.animation = '';
+    }
+    if (this._isHidden) {
+      this._element.style.visibility = 'hidden';
+    } else {
+      this._element.style.visibility = 'visible';
+    }
+    const radius = progressRingCircle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+    progressRingCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressRingCircle.style.strokeDashoffset = `${circumference}`;
+    const offset = circumference - this._value / 100 * circumference;
+    progressRingCircle.style.strokeDashoffset = `${offset}`;
+    return this._element;
+  }
+
+  setValue(value) {
+    this._value = value;
+    this.generateProgress();
+  }
+
+  onToggleAnimated() {
+    this._isAnimated = !this._isAnimated;
+    this.generateProgress();
+  }
+
+  onToggleHide() {
+    this._isHidden = !this._isHidden;
+    this.generateProgress();
+  }
+
+  render() {
+    this.getTemplate()
+    let progressElement = this.generateProgress();
+    document.querySelector(`${this._parentNode}`).append(progressElement);
+  }
 }
 
-const checkboxAnimate = document.querySelector('#progress__animate')
-const progressRing = document.querySelector('.progress-ring')
-function checkAnimate() {
-  if (checkboxAnimate.checked) {
-    progressRing.style.animation = '2s linear 0s normal none infinite running rotation';
-  }
-  else {
-    progressRing.style.animation=''
-  }
-}
-
-const checkboxHide = document.querySelector('#progress__hide')
-function checkHide() {
-  if (checkboxHide.checked) {
-    progressRing.style.visibility = 'hidden'
-  }
-  else {
-    progressRing.style.visibility='visible'
-  }
-}
+const secondProgress = new Progress('#root', 20, true, false);
+secondProgress.render();

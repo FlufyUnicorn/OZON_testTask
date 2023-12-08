@@ -6,39 +6,41 @@
   <title>Title</title>
   <link rel="stylesheet" href="index.css"/>
 </head>
-<body>
-  <section class="progress">
+<body id="root">
+<!--  <section class="progress">-->
+  <template class="progress-template">
     <svg class="progress-ring">
       <circle class=" progress-ring__circle_shadow" cx="55" cy="55" r="49"></circle>
       <circle class="progress-ring__circle" cx="55" cy="55" r="49"></circle>
     </svg>
-    <form class="progress__form">
-      <div class="progress__form-element">
-        <label class="progress__form-label">
-          <input class="progress__percent" type="number"/>
-        </label>
-        <span class="progress__span">Value</span>
-      </div>
-      <div class="progress__form-element">
-        <label class="progress__form-label">
-          <input id="progress__animate" class="progress__percent" type="checkbox" onclick="checkAnimate()"/>
-          <div class="progress__slider">
-            <div class="progress__knob"></div>
-          </div>
-        </label>
-        <span class="progress__span">Animated</span>
-      </div>
-      <div class="progress__form-element">
-        <label class="progress__form-label">
-          <input id="progress__hide" class="progress__percent" type="checkbox" onclick="checkHide()"/>
-          <div class="progress__slider">
-            <div class="progress__knob"></div>
-          </div>
-        </label>
-        <span class="progress__span">Hide</span>
-      </div>
-    </form>
-  </section>
+  </template>
+<!--    <form class="progress__form">-->
+<!--      <div class="progress__form-element">-->
+<!--        <label class="progress__form-label">-->
+<!--          <input class="progress__percent" type="number" min="0" max="100"/>-->
+<!--        </label>-->
+<!--        <span class="progress__span">Value</span>-->
+<!--      </div>-->
+<!--      <div class="progress__form-element">-->
+<!--        <label class="progress__form-label">-->
+<!--          <input id="progress__animate" class="progress__percent" type="checkbox" onclick="checkAnimate()"/>-->
+<!--          <div class="progress__slider">-->
+<!--            <div class="progress__knob"></div>-->
+<!--          </div>-->
+<!--        </label>-->
+<!--        <span class="progress__span">Animated</span>-->
+<!--      </div>-->
+<!--      <div class="progress__form-element">-->
+<!--        <label class="progress__form-label">-->
+<!--          <input id="progress__hide" class="progress__percent" type="checkbox" onclick="checkHide()"/>-->
+<!--          <div class="progress__slider">-->
+<!--            <div class="progress__knob"></div>-->
+<!--          </div>-->
+<!--        </label>-->
+<!--        <span class="progress__span">Hide</span>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </section>-->
 
 <script src="index.js"></script>
 </body>
