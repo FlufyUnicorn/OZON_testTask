@@ -1,12 +1,15 @@
-const progress = new Progress('#parent', 20, true, false);
+const initialValue = 20;
+const initialIsAnimated = true;
+const initialIsHide = false;
+const progress = new Progress('#parent', initialValue, initialIsAnimated, initialIsHide);
 progress.render();
 
 const inputPercent = document.querySelector('#progress__percent');
-inputPercent.value = progress._value;
+inputPercent.value = initialValue;
 const inputAnimate = document.querySelector('#progress__animate');
-inputAnimate.checked = progress._isAnimated;
+inputAnimate.checked = initialIsAnimated;
 const inputHide = document.querySelector('#progress__hide');
-inputHide.checked = progress._isHidden;
+inputHide.checked = initialIsHide;
 
 inputPercent.addEventListener('change', function () {
   progress.setValue(inputPercent.value);
